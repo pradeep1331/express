@@ -101,7 +101,8 @@ async function createConnection(){
   const client = await createConnection();
   
 //CRUD  - READ = GET
-const PORT = "9000";
+//const PORT = "9000";
+const PORT = process.env.PORT;
 
 //middleware
 //aap.use => intercepts every request
