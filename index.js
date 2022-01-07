@@ -171,9 +171,9 @@ app.post("/movies",express.json(), async (request,response)=>{
   response.send(result);
 });
 
-app.delete("/movies/id",async (request,response)=>{
+app.delete("/movies/:id",async (request,response)=>{
     
-  const id = +request.params;
+  const id = +request.params.id
  console.log(id);
  
   const Delete = await client
@@ -185,15 +185,16 @@ app.delete("/movies/id",async (request,response)=>{
 
 });
 
-app.put("/movies",express.json(), async (request,response)=>{
+app.put("/movies/:id",express.json(), async (request,response)=>{
     
+  const id = +request.params.id
   const data = request.body;
-  console.log(data);
 
   const result = await client
   .db("db1")
   .collection("movies")
-  .updateOne(data);
+  .updateOne({id:id},{$set:data});
+
   response.send(result);
 });
 
